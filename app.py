@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from flask import Blueprint, Flask, g, request, jsonify
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import text
 import logging, os, time
 
 load_dotenv()
@@ -58,6 +58,17 @@ def log_request(response):
     return response
 
 
+#HealthCHeck
+@app.route('/healthcheck', methods=['GET'])
+def healthcheck():
+    try:
+        db.session.execute(text("SELECT 1"))
+        return jsonify({"status" : "ok", "database": "ok"}), 200
+    except Exception as e:
+        log.error(f"Healthcheck failed {e}")
+        return jsonify({"status": "error", "database": "unreachable"}), 500
+        
+        
 
 def get_student_by_id(student_id):
     return Student.query.get(student_id)
