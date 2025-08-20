@@ -1,0 +1,29 @@
+curl -X POST http://localhost:5000/api/v1/students \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice", "age": 20, "grade": "A", "email": "alice@example.com"}'
+
+
+curl http://localhost:5000/api/v1/students
+
+curl http://localhost:5000/api/v1/students/1
+
+curl -X PUT http://localhost:5000/api/v1/students/1 \
+  -H "Content-Type: application/json" \
+  -d '{"age": 21, "grade": "A+"}'
+
+curl -X DELETE http://localhost:5000/api/v1/students/1
+
+curl http://localhost:5000/api/v1/students/name/Alice
+
+curl http://localhost:5000/healthcheck
+
+curl -X POST http://localhost:5000/api/v1/students \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Bob", "age": 22, "grade": "B", "email": "bob@example.com"}'
+
+curl http://localhost:5000/api/v1/students/9999
+
+curl -X POST http://localhost:5000/api/v1/students \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice2", "age": 20, "grade": "A", "email": "alice@example.com"}'
+
